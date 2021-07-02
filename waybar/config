@@ -1,0 +1,165 @@
+{
+    // "layer": "top", // Waybar at top layer
+    // "position": "bottom", // Waybar position (top|bottom|left|right)
+     "height": 10, // Waybar height (to be removed for auto height)
+     "min-height": 20,
+    // "width": 1280, // Waybar width
+    // Choose the order of the modules
+    "modules-left": [
+       "custom/power",
+    ],
+    "modules-center": ["sway/workspaces"],
+    "modules-right": ["network", "cpu", "memory", "battery", "clock"],
+    "sway/mode": {
+        "format": "<span style=\"italic\">{}</span>"
+    },
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        }
+    },
+    "tray": {
+        "icon-size": 10,
+        "spacing": 10
+    },
+    "calendar":{
+
+},
+    "clock": {
+        // "timezone": "America/New_York",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format-alt": "{:%Y-%m-%d}"
+    },
+    "cpu": {
+        "format": "{usage}% ",
+        "tooltip": false
+    },
+    "memory": {
+        "format": "{}% "
+    },
+    "custom/weather": {
+    "format": "<span color='#22dfda'>{}</span>",
+    "interval": 18000,
+    "exec": "sb-forecast",
+    //ansiweather -l shiraz,IR -u metric -s true -f 1 -a false | cut -d' ' -f2,8-
+    "exec-if": "ping openweathermap.org -c1",
+    "tooltip": "false"
+  },
+    "temperature": {
+        // "thermal-zone": 2,
+        // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+        "critical-threshold": 80,
+        // "format-critical": "{temperatureC}°C {icon}",
+        "format": "{temperatureC}°C {icon}",
+        "format-icons": ["", "", ""]
+    },
+    "backlight#icon": {
+        // "device": "acpi_video1",
+        "format": "{icon}",
+        "format-icons": ["", ""],
+        "on-click": "ctl-backlight.waybar.sh down"
+    },
+    "backlight#value": {
+        // "device": "acpi_video1",
+        "format": "{percent}",
+        "on-click": "ctl-backlight.waybar.sh up"
+    },
+    "battery": {
+        "states": {
+            // "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "max-length": 40,
+        "format": "{capacity}% {icon}",
+        "format-charging": "{capacity}% ",
+        "format-plugged": "{capacity}% ",
+        "format-alt": "{time} {icon}",
+        // "format-good": "", // An empty format will hide the module
+        // "format-full": "",
+        "format-icons": ["", "", "", "", ""]
+    },
+    "battery#bat2": {
+        "bat": "BAT2"
+    },
+    "custom/power": {
+    "format": "⏻",
+    "on-click": "swaynag -t warning -m 'Power Menu Options' -b 'Logout' 'swaymsg exit' -b 'Restart' 'shutdown -r now' -b 'Shutdown'  'shutdown -h now' --background=#005566 --button-background=#009999 --button-border=#002b33 --border-bottom=#002b33"
+  },
+"network": {
+        "format-wifi": "{essid} ({signalStrength}%) ",
+        "format-ethernet": "{ifname} ",
+        "format-disconnected": "",
+        "max-length": 50,
+        "on-click": "urxvt -e 'nmtui'"
+    },
+    "pulseaudio#sound": {
+        "format": "{volume}",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+    },
+    "pulseaudio#icon": {
+        // "scroll-step": 1, // %, can be a float
+        "format": "{icon}",
+        "format-bluetooth": "{icon}",
+        "format-bluetooth-muted": " {icon}",
+        "format-muted": "",
+        "format-source-muted": "",
+        "on-click": "pactl set-sink-mute 0 toggle",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+    },
+    "custom/media": {
+        "format": "{icon} {}",
+        "return-type": "json",
+        "max-length": 40,
+        "format-icons": {
+            "spotify": "",
+            "default": "🎜"
+        },
+        "escape": true,
+        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
+        // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
+  },
+
+  "custom/logo": {
+        "format": ""
+  },
+
+ // "custom/emailicon": {
+ //     "format": ""
+ // },
+
+ // "custom/unreademail": {
+ //     "format": "{}",
+ //     "exec": "cat /tmp/unread-email-count.txt || echo ErrNF",
+ //     "signal": 2,
+ //     "interval": 10,
+ // },
+
+  "custom/icon-cube": {
+      "format": ""
+  },
+
+  "custom/pacman-package-count": {
+      "format": "{}",
+      "exec": "echo `pacman -Qe | wc -l`",
+      "interval": 3600
+  }
+}

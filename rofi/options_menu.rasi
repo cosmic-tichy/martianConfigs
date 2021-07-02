@@ -1,0 +1,44 @@
+
+configuration {
+    theme:                          "config";
+    show-icons:                     false;
+    font:                           "Font Awesome 17";
+}
+
+window {
+    height:                         370px; // 1440 - 2*16
+    width:                          100px;
+    location:                       center;
+    anchor:                         center;
+    x-offset:                       0;
+    y-offset:                       0;
+    border-radius:10;
+}
+
+mainbox {
+    children:                       [listview]; /* No text entry */
+    border:                         4px;
+    border-radius:5;
+    border-color:                   @background;
+    padding:                        12px;
+}
+
+listview {
+    layout:                         vertical;
+    spacing:                        10px;
+}
+
+element-text {
+    horizontal-align:               0.5;
+    vertical-align:                 4;
+    margin:                         5px;
+    border:                         0px;
+    border-color:                   @primary;
+    border-radius:                  5;
+    padding:                        12px 0px 6px;
+    width: 50px;
+    
+}
+element {
+    padding:                        0px;
+}
